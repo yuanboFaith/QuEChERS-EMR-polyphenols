@@ -1,0 +1,7 @@
+name: ""
+navbar:
+  title: ""
+  left:
+    - text: "Analysis script"
+      href: index.html
+output_dir: "."

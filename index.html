@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>QuEChERS-EMR UHPLC-MS/MS for analysis of polyphenols in fatty matrices</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Analysis script</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">QuEChERS-EMR UHPLC-MS/MS for analysis of polyphenols in fatty matrices</h1>
+<h4 class="date">11/2/2020</h4>
+
+</div>
+
+
+<div id="method-validation" class="section level1">
+<h1>Method validation</h1>
+<pre class="r"><code>library(tidyverse)
+library(readxl)
+library(stringr)
+library(rebus)
+library(RColorBrewer)
+library(cowplot)
+library(viridis)
+library(ggrepel)
+
+# global plot setup
+theme_set(theme_bw() + 
+            theme(
+              # strip.text = element_text(face = &quot;bold&quot;),
+              strip.text = element_blank(),
+              strip.background = element_blank(),
+              strip.placement = &quot;outside&quot;,
+              axis.text = element_text(colour = &quot;black&quot;, size = 17),
+              axis.title = element_text(colour = &quot;black&quot;, face = &quot;bold&quot;, size = 18),
+              panel.grid = element_blank())) 
+
+# input data
+path = &quot;/Users/Boyuan/Desktop/My publication/18. Polyphenol EMR J. Food Chem (Zhiya)/ready files/Validation result.xlsx&quot;
+
+d = read_excel(path, sheet = &quot;all&quot;)
+# str(d)
+
+
+# remove Catechin analogues of poor recovery at drying step
+d2 = d %&gt;% select(-c(&quot;C&quot;, &quot;EC&quot;, &quot;PAC-B2&quot;, &quot;4-O-Me-C&quot;, &quot;3-O-Me-EC&quot;, &quot;4-O-Me-EC&quot;))
+# str(d2)
+
+
+
+# tidy up
+d2.tidy = d2 %&gt;%
+  gather(-c(matrix, validation, mean.sd, IScorrection), 
+         key = compound, value = value) 
+
+# convert value to percentage
+d2.tidy = d2.tidy %&gt;% mutate(value = value * 100) %&gt;%
+  spread(key = mean.sd, value = value)
+
+d2.tidy$compound %&gt;% n_distinct()</code></pre>
+<pre><code>## [1] 49</code></pre>
+<pre class="r"><code># accuracy
+d.accuracy = d2.tidy %&gt;% 
+  filter(validation %&gt;% str_detect(&quot;Accuracy&quot;))
+
+# add spike level
+d.accuracy$level = d.accuracy$validation %&gt;% 
+  str_extract(pattern = DOT %R% WRD) %&gt;%
+  str_extract(WRD) 
+
+d.accuracy = d.accuracy %&gt;%
+  mutate(validation = &quot;Accuracy&quot;)
+
+# define plot numbers
+color.compound = (c(brewer.pal(8, &quot;Dark2&quot;),
+                    brewer.pal(11, &quot;Spectral&quot;)[-c(5, 6, 7)],# remove light colors
+                    &quot;black&quot;, &quot;grey&quot;) %&gt;% sort() %&gt;%
+                    colorRampPalette())(d2.tidy$compound %&gt;% n_distinct()) 
+n.matrix = d.accuracy$matrix %&gt;% n_distinct()
+
+# plot accuracy
+dg = .5
+
+d.badAccuracy = d.accuracy %&gt;% filter(mean &lt; 0 | mean &gt; 200 | std &gt; 50) 
+d.badAccuracy</code></pre>
+<pre><code>## # A tibble: 12 x 7
+##    matrix      validation IScorrection compound    mean     std level
+##    &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
+##  1 Avocado     Accuracy   T            4-HCA      -55.2  434.   A    
+##  2 Avocado     Accuracy   T            CA         173.    80.0  A    
+##  3 Avocado     Accuracy   T            FA         123.   604.   A    
+##  4 Avocado     Accuracy   T            4-HCA    -1561.  2106.   B    
+##  5 Avocado     Accuracy   T            CA         332.   454.   B    
+##  6 Avocado     Accuracy   T            FA       -1042.  2593.   B    
+##  7 Beef        Accuracy   T            DHF        236.     9.73 A    
+##  8 Horse serum Accuracy   T            HA          95.8   60.1  A    
+##  9 Horse serum Accuracy   T            HA          60.9  215.   B    
+## 10 Horse serum Accuracy   T            PA         102.    57.9  B    
+## 11 Pork liver  Accuracy   T            DHF        234.     9.63 A    
+## 12 Pork liver  Accuracy   T            HA         172.    71.6  B</code></pre>
+<pre class="r"><code># Showing what data points are removed from plot
+
+plt.accuracy = d.accuracy %&gt;%
+  anti_join(d.badAccuracy) %&gt;%
+  ggplot(aes(x = level, y = mean, color = compound)) +
+  
+  
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = level), fill = &quot;white&quot;, width = .8) +
+  
+  annotate(&quot;rect&quot;, alpha = .15, fill = &quot;springgreen4&quot;,
+           xmin = .5, xmax = 2.5, ymin = 80, ymax = 120) +
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = level), fill = &quot;white&quot;, width = .8) +
+  
+  geom_errorbar(size = .3, 
+                aes(ymin = mean - std, 
+                    ymax = mean + std),
+                position = position_dodge(dg)) +
+  
+  geom_point(size = 4, position = position_dodge(dg), fill = &quot;white&quot;, shape = 21) +
+  geom_point(size = 4, position = position_dodge(dg), alpha = 0.3) +
+  
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound) +
+  facet_grid(matrix ~ validation, scales = &quot;free_y&quot;, switch = &quot;y&quot;) +
+  labs(x = &quot;Spike level&quot;) +
+  theme(legend.position = &quot;none&quot;, axis.title.y = element_blank()) +
+  geom_segment(aes(x = .5, xend = 2.5, y = 100, yend = 100),
+               color = &quot;darkgreen&quot;, linetype = &quot;dashed&quot;, size = .1)
+# plt.accuracy
+
+
+
+
+
+# recovery
+d.recovery = d2.tidy %&gt;%
+  filter(validation %&gt;% str_detect(&quot;recovery&quot;)) 
+
+
+# cleanup and put in order sample prep step names 
+d.recovery$validation = d.recovery$validation %&gt;% str_remove(pattern = &quot;recovery&quot; %R% DOT)
+
+d.recovery$validation = 
+  d.recovery$validation %&gt;% factor(
+    levels = d.recovery$validation %&gt;% unique() %&gt;% rev(),
+    ordered = T)
+
+
+# check outlier numbers
+d.badRecovery = d.recovery %&gt;% filter(mean &gt; 200 | std &gt; 50 | std &lt; 0 )
+d.badRecovery</code></pre>
+<pre><code>## # A tibble: 28 x 6
+##    matrix  validation       IScorrection compound   mean     std
+##    &lt;chr&gt;   &lt;ord&gt;            &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Avocado Overall recovery F            4-HCA     1213.  4953. 
+##  2 Avocado Overall recovery F            FA       -1101. -7884. 
+##  3 Avocado Overall recovery T            4-HBA      133.    54.5
+##  4 Avocado Overall recovery T            CA         255.  1249. 
+##  5 Avocado Drying           F            4-HCA      553.  2294. 
+##  6 Avocado Drying           F            CA         117.    97.3
+##  7 Avocado Drying           F            FA        -524. -3814. 
+##  8 Avocado Drying           T            4-HCA      120.    56.2
+##  9 Avocado Drying           T            CA         185.   978. 
+## 10 Avocado Drying           T            FA         126.    75.1
+## # … with 18 more rows</code></pre>
+<pre class="r"><code># plot
+dg2 = .5
+
+plt.recovery = d.recovery %&gt;%
+  anti_join(d.badRecovery) %&gt;%
+  
+  ggplot(aes(x = IScorrection, y = mean, color = compound)) +
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = IScorrection), fill = &quot;white&quot;, width = .8) +
+  
+  annotate(&quot;rect&quot;, alpha = .15, fill = &quot;springgreen4&quot;,
+           xmin = .5, xmax = 2.5, ymin = 80, ymax = 120) +
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = IScorrection), fill = &quot;white&quot;, width = .8) +
+  
+  geom_errorbar(size = .3, aes(ymin = mean - std, 
+                               ymax = mean + std),
+                position = position_dodge(dg2)) +
+  
+  geom_point(size = 4, position = position_dodge(dg2), fill = &quot;white&quot;, shape = 21) +
+  geom_point(size = 4, position = position_dodge(dg2), alpha = 0.1) +
+  
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound) +
+  facet_grid(matrix ~ validation, 
+             scales = &quot;free_y&quot;, switch = &quot;y&quot;) +
+  labs(x = &quot;IS-correction&quot;) +
+  theme(legend.position = &quot;none&quot;, axis.title.y = element_blank()) +
+  geom_segment(aes(x = .5, xend = 2.5, y = 100, yend = 100), 
+               color = &quot;darkgreen&quot;, linetype = &quot;dashed&quot;, size = .1)
+
+# plt.recovery 
+
+
+
+
+# matrix effect
+d.matrixEffect = d2.tidy %&gt;%
+  filter(validation %&gt;% str_detect(&quot;Matrix effect&quot;)) 
+
+
+# check outlier numbers
+d.badMatrix = d.matrixEffect %&gt;% filter(mean &gt; 200 | std &gt; 50 | std &lt; 0 )
+d.badMatrix</code></pre>
+<pre><code>## # A tibble: 14 x 6
+##    matrix      validation    IScorrection compound    mean      std
+##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Avocado     Matrix effect F            4-HCA     -157.   -638.  
+##  2 Avocado     Matrix effect F            CA         425.    295.  
+##  3 Avocado     Matrix effect F            FA         161.   1145.  
+##  4 Avocado     Matrix effect T            4-HCA    -7085.  -2539.  
+##  5 Avocado     Matrix effect T            CA         113.    534.  
+##  6 Avocado     Matrix effect T            FA       -7321.  -3416.  
+##  7 Beef        Matrix effect F            R3G        417.     22.8 
+##  8 Beef        Matrix effect T            DHF        274.      9.25
+##  9 Beef        Matrix effect T            R3G        609.     31.8 
+## 10 Horse serum Matrix effect F            HA        1579.    370.  
+## 11 Horse serum Matrix effect F            PA         216.     56.9 
+## 12 Horse serum Matrix effect T            HA          91.2   148.  
+## 13 Horse serum Matrix effect T            PA         105.     56.4 
+## 14 Pork liver  Matrix effect T            DHF        274.      9.25</code></pre>
+<pre class="r"><code># plot
+dg3 = .5
+
+plt.MatrixEffect = d.matrixEffect %&gt;%
+  anti_join(d.badMatrix) %&gt;%
+  
+  ggplot(aes(x = IScorrection, y = mean, color = compound)) +
+  
+  
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = IScorrection), fill = &quot;white&quot;, width = .8) +
+  
+  annotate(&quot;rect&quot;, alpha = .15, fill = &quot;springgreen4&quot;,
+           xmin = .5, xmax = 2.5, ymin = 80, ymax = 120) +
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = IScorrection), fill = &quot;white&quot;, width = .8) +
+  
+  geom_errorbar(size = .3, aes(ymin = mean - std, 
+                               ymax = mean + std),
+                position = position_dodge(dg3)) +
+  
+  
+  
+  geom_point(size = 4, position = position_dodge(dg3), fill = &quot;white&quot;, shape = 21) +
+  geom_point(size = 4, position = position_dodge(dg3), alpha = 0.3) +
+  
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound) +
+  facet_grid(matrix ~ validation, 
+             scales = &quot;free_y&quot;, switch = &quot;y&quot;) +
+  labs(x = &quot;IS-correction&quot;) +
+  theme(legend.position = &quot;none&quot;, axis.title.y = element_blank()) +
+  geom_segment(aes(x = .5, xend = 2.5, y = 100, yend = 100),
+               color = &quot;darkgreen&quot;, linetype = &quot;dashed&quot;, size = .1)
+
+
+# plt.MatrixEffect
+
+
+
+
+# Processing efficiency
+d.processEfficiency = d2.tidy %&gt;%
+  filter(validation %&gt;% str_detect(&quot;Overall process efficiency&quot;)) 
+
+
+# check outlier numbers
+d.badProcessEfficiency = d.processEfficiency %&gt;% filter(mean &gt; 200 | std &gt; 50 | std &lt; 0 )
+d.badProcessEfficiency</code></pre>
+<pre><code>## # A tibble: 12 x 6
+##    matrix      validation                 IScorrection compound    mean      std
+##    &lt;chr&gt;       &lt;chr&gt;                      &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Avocado     Overall process efficiency F            4-HCA    -1901.   -674.  
+##  2 Avocado     Overall process efficiency F            CA          47.6   197.  
+##  3 Avocado     Overall process efficiency F            FA       -1767.  -1063.  
+##  4 Avocado     Overall process efficiency T            4-HCA    -1471.  -1985.  
+##  5 Avocado     Overall process efficiency T            CA         289.    395.  
+##  6 Avocado     Overall process efficiency T            FA        -917.  -2283.  
+##  7 Beef        Overall process efficiency T            DHF        203.      9.02
+##  8 Horse serum Overall process efficiency F            HA         281.    316.  
+##  9 Horse serum Overall process efficiency F            PA          93.6    56.2 
+## 10 Horse serum Overall process efficiency T            HA          52.0   184.  
+## 11 Horse serum Overall process efficiency T            PA          99.5    56.5 
+## 12 Pork liver  Overall process efficiency T            DHF        203.      9.02</code></pre>
+<pre class="r"><code># plot
+dg4 = .5
+
+plt.processEfficiency = d.processEfficiency %&gt;%
+  anti_join(d.badProcessEfficiency) %&gt;%
+  
+  ggplot(aes(x = IScorrection, y = mean, color = compound)) +
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = IScorrection), fill = &quot;white&quot;, width = .8) +
+  
+  annotate(&quot;rect&quot;, alpha = .15, fill = &quot;springgreen4&quot;,
+           xmin = .5, xmax = 2.5, ymin = 80, ymax = 120) +
+  
+  geom_boxplot(outlier.alpha = 0, aes(group = IScorrection), fill = &quot;white&quot;, width = .8) +
+  
+  
+  geom_errorbar(size = .3, aes(ymin = mean - std, 
+                               ymax = mean + std),
+                position = position_dodge(dg4)) +
+  
+  geom_point(size = 4, position = position_dodge(dg4), fill = &quot;white&quot;, shape = 21) +
+  geom_point(size = 4, position = position_dodge(dg4), alpha = 0.3) +
+  
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound) +
+  facet_grid(matrix ~ validation, 
+             scales = &quot;free_y&quot;, switch = &quot;y&quot;) +
+  labs(x = &quot;IS-correction&quot;) +
+  theme(legend.position = &quot;none&quot;, axis.title.y = element_blank()) +
+  geom_segment(aes(x = 0.5, xend = 2.5, y = 100, yend = 100),
+               color = &quot;darkgreen&quot;, linetype = &quot;dashed&quot;, size = .1)
+
+# plt.processEfficiency
+
+
+
+
+
+# -------# -------# -------# -------# -------# -------
+p1 = plot_grid(plt.accuracy, 
+               plt.recovery,
+               plt.MatrixEffect, 
+               plt.processEfficiency,
+               
+               nrow = 1,
+               rel_widths = c(1, 3.5, 1, 1)) 
+
+
+# Check outlier compounds and associated matrix
+d.badALL = d.badAccuracy %&gt;% select(-level) %&gt;% rbind(d.badMatrix) %&gt;%
+  rbind(d.badRecovery) %&gt;% rbind(d.badProcessEfficiency)
+
+# d.badALL %&gt;% as.data.frame()
+
+d.badALL %&gt;% select(matrix, compound) %&gt;%
+  table()</code></pre>
+<pre><code>##              compound
+## matrix        4-HBA 4-HCA CA DHF FA HA PA R3G
+##   Avocado         2    12 12   0 12  0  0   0
+##   Beef            0     0  0   3  0  0  0   2
+##   Horse serum     0     0  0   0  0 10  9   0
+##   Pork liver      0     0  0   3  0  1  0   0</code></pre>
+<pre class="r"><code># bad criteria: filter(mean &gt; 200 | std &gt; 50 | std &lt; 0 )
+
+
+
+# new global setup
+theme_set(theme_bw() + 
+            theme(
+              strip.text = element_text(face = &quot;bold&quot;),
+              # strip.text = element_blank(),
+              strip.background = element_blank(),
+              strip.placement = &quot;outside&quot;,
+              axis.text = element_text(colour = &quot;black&quot;, size = 15.5),
+              axis.title = element_text(colour = &quot;black&quot;, face = &quot;bold&quot;, size = 15.5),
+              panel.grid = element_blank(),
+              legend.text = element_text(size = 15),
+              legend.title = element_text(size = 15, face = &quot;bold&quot;))) 
+
+# ----# -----
+
+# plt.allMatrix.accuracy = d2.tidy %&gt;%
+#   filter(validation %&gt;% str_detect(&quot;Accuracy&quot;)) %&gt;%
+#   
+#   ggplot(aes(x =  mean, color = validation, fill = validation)) +
+#   geom_histogram(binwidth = 5, alpha = .4, position = &quot;dodge&quot;) +
+#   scale_x_continuous(limits = c(0, 200), breaks = seq(0, 200, 20)) +
+#   scale_y_continuous(breaks = seq(0, 200, 10)) +
+#   theme(legend.position = &quot;bottom&quot;)  
+# 
+# plt.allMatrix.accuracy
+
+
+#  2D density plot
+d2.tidy$validation = d2.tidy$validation %&gt;% 
+  str_replace(pattern = &quot;Accuracy.A&quot;, replacement = &quot;Accuracy&quot;)
+
+d2.tidy$validation = d2.tidy$validation %&gt;% 
+  str_replace(pattern = &quot;Accuracy.B&quot;, replacement = &quot;Accuracy&quot;)
+
+
+plt.allMatrix.accuracy.2Ddensity =
+  d2.tidy %&gt;% 
+  filter(validation %&gt;% str_detect(&quot;Accuracy&quot;)) %&gt;%
+  
+  ggplot(aes(x = mean, y = std)) +
+  stat_density_2d(aes(fill = stat(density)), geom = &quot;raster&quot;, contour = F) +
+  geom_point(color = &quot;white&quot;, shape = &quot;.&quot;, alpha = .4) + 
+  # scale_fill_viridis(option = &quot;inferno&quot;) + 
+  scale_fill_viridis(option = &quot;D&quot;) +
+  geom_rug(sides = &quot;tr&quot;, color = &quot;black&quot;, alpha = 0.2) +
+  scale_x_log10() + scale_y_log10() + 
+  annotation_logticks() +
+  
+  # label outliers not presented in the box-scatter plot
+  geom_text_repel(data = d.badAccuracy,
+                  aes(label = paste(compound,&quot;_&quot;, matrix, &quot;_&quot;, level)),
+                  size = 4, color = &quot;snow3&quot;)
+
+# plt.allMatrix.accuracy.2Ddensity
+
+
+
+
+
+
+# D2 density plot for recovery (Absolute, without IS-correction; extraction, EMR, and drying)
+d2.tidy$validation %&gt;% unique()</code></pre>
+<pre><code>## [1] &quot;Accuracy&quot;                   &quot;Matrix effect&quot;              &quot;Overall process efficiency&quot; &quot;Overall recovery&quot;          
+## [5] &quot;recovery.Drying&quot;            &quot;recovery.EMR&quot;               &quot;recovery.Extraction&quot;</code></pre>
+<pre class="r"><code>d2.tidy.stepwiseRecovery.absolute = d2.tidy %&gt;%
+  filter(validation %in% c(&quot;recovery.Extraction&quot;, &quot;recovery.Drying&quot;, &quot;recovery.EMR&quot;)) %&gt;%
+  filter(IScorrection == &quot;F&quot;)
+
+d2.tidy.stepwiseRecovery.absolute$validation =
+  d2.tidy.stepwiseRecovery.absolute$validation %&gt;% str_remove(pattern = &quot;recovery.&quot;) %&gt;%
+  str_replace(pattern = &quot;Drying&quot;, replacement = &quot;Dry&quot;)
+
+
+# simplify bad recovery database
+d.badRecoverySimplified = d.badRecovery %&gt;%
+  filter(validation != &quot;Overall recovery&quot;)
+
+d.badRecoverySimplified$validation = 
+  d.badRecoverySimplified$validation %&gt;% 
+  str_replace(pattern = &quot;Drying&quot;, replacement = &quot;Dry&quot;)
+
+# plot
+plt.allMatrix.Recovery.2Ddensity = 
+  d2.tidy.stepwiseRecovery.absolute %&gt;%
+  ggplot(aes(x = mean, y = std)) +
+  stat_density_2d(aes(fill = stat(density)), geom = &quot;raster&quot;, contour = F) +
+  geom_point(color = &quot;white&quot;, shape = &quot;.&quot;, alpha = .4) + 
+  # scale_fill_viridis(option = &quot;inferno&quot;) + 
+  scale_fill_viridis(option = &quot;D&quot;) +
+  geom_rug(sides = &quot;tr&quot;, color = &quot;black&quot;, alpha = 0.2) +
+  scale_x_log10() + scale_y_log10() + 
+  annotation_logticks() +
+  
+  # label outliers not presented in the box-scatter plot
+  geom_text_repel(data = d.badRecoverySimplified,
+                  aes(label = paste(compound,&quot;_&quot;, matrix, &quot;_&quot;, validation)),
+                  size = 2, color = &quot;snow3&quot;, arrow = F) +
+  facet_wrap(~validation, nrow = 1)
+
+# plt.allMatrix.Recovery.2Ddensity
+
+
+
+# d2.tidy.stepwiseRecovery.absolute %&gt;%
+#   ggplot(aes(x =  mean, color = IScorrection, fill = IScorrection)) +
+#   geom_histogram(binwidth = 5, alpha = .4, position = &quot;dodge&quot;) +
+#   scale_x_continuous(limits = c(0, 200), breaks = seq(0, 200, 20)) +
+#   scale_y_continuous(breaks = seq(0, 200, 10)) +
+#   theme(legend.position = &quot;bottom&quot;)  +
+#   facet_wrap(~validation, nrow = 1)
+
+
+
+
+# check validation success vs. background interference
+d.background = read_excel(path, sheet = &quot;background.vs.spike&quot;)
+d.background = d.background %&gt;%
+  gather(-c(matrix, level), key = compound, value = background.spk.ratio)
+
+d.background = d.accuracy %&gt;%
+  filter(IScorrection == &quot;T&quot;) %&gt;%
+  left_join(d.background, by = c(&quot;matrix&quot;, &quot;compound&quot;, &quot;level&quot;)) 
+
+# also add back accuracy dataset
+d.background = d.background %&gt;% left_join(
+  d.badAccuracy %&gt;% select(-mean, -std) %&gt;% mutate(bad = &quot;bad&quot;))
+
+
+# plot
+plt.background.vs.spk = 
+  d.background %&gt;%
+  ggplot(aes(x = background.spk.ratio, y = std, 
+             shape = level, color = matrix, fill = matrix)) +
+  scale_x_log10(breaks = c(.001, .01, .1, 1, 10, 100, 1000)) +
+  scale_y_log10() +
+  annotation_logticks() +
+  geom_smooth(aes(group = 1), 
+              se = F, color = &quot;black&quot;, show.legend = F, size = 2) +
+  
+  geom_point(size = 4, alpha = .7) +
+  geom_point(size = 4, alpha = .7, fill = &quot;white&quot;) +
+  
+  geom_text_repel(data = d.background[!d.background$bad %&gt;% is.na(), ], 
+                  aes(label = paste(compound, &quot;-&quot;, matrix), 
+                      x = background.spk.ratio), fontface = &quot;bold&quot;,
+                  size = 4.5) +
+  
+  scale_shape_manual(values = c(&quot;A&quot; = 21, &quot;B&quot; = 25)) +
+  
+  scale_color_brewer(palette = &quot;Dark2&quot;) +
+  scale_fill_brewer(palette = &quot;Dark2&quot;) 
+
+# plt.background.vs.spk
+
+
+
+p2 = plot_grid(plt.allMatrix.accuracy.2Ddensity,
+               plt.background.vs.spk)</code></pre>
+<pre class="r"><code>p2</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" width="1920" /></p>
+<pre class="r"><code># plot_grid(p1, p2, nrow = 2,
+#           rel_heights = c(7, 2))</code></pre>
+<pre class="r"><code># p1 small screen 17 X 12
+p1</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="1920" /></p>
+</div>
+<div id="emr-method-development" class="section level1">
+<h1>EMR method development</h1>
+<pre class="r"><code>library(rebus)
+library(gridExtra)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;gridExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     combine</code></pre>
+<pre class="r"><code>library(cowplot)
+library(ggrepel)
+library(readxl)
+library(RColorBrewer)
+library(tidyverse)
+
+theme_set(theme_bw() + theme(axis.text = element_text(colour = &quot;black&quot;),
+                             axis.title = element_text(colour = &quot;black&quot;, face = &quot;bold&quot;),
+                             strip.background = element_blank(),
+                             strip.text = element_text(face = &quot;bold&quot;)))
+
+path = &quot;/Users/Boyuan/Desktop/My publication/18. Polyphenol EMR J. Food Chem (Zhiya)/Polyphenol EMR All Data.xlsx&quot;
+
+# ACN percentage 
+d.opt.pct = read_excel(path, sheet = &quot;ACN percent opt2&quot;)
+d.opt.pct = d.opt.pct %&gt;%
+  gather(-c(`Data File`, Name, `Acq. Date-Time`, solvent.pct), key = compound, value = resp)
+
+x = d.opt.pct %&gt;% filter(solvent.pct == &quot;ctrl&quot;) %&gt;%
+  group_by(compound) %&gt;%
+  summarise(resp.ctrl.mean = mean(resp),resp.ctrl.sd = sd(resp))
+
+y = d.opt.pct %&gt;% filter(solvent.pct != &quot;ctrl&quot;) %&gt;%
+  group_by(solvent.pct, compound) %&gt;%
+  summarise(resp.mean = mean(resp), resp.sd = sd(resp))
+
+d.opt.pct.recovery = y %&gt;% left_join(x, by = c(&quot;compound&quot;)) %&gt;%
+  mutate(recovery.mean = resp.mean / resp.ctrl.mean * 100,
+         recovery.sd = sqrt((resp.sd/resp.mean)^2 + (resp.ctrl.sd/resp.ctrl.mean)^2) * recovery.mean  )
+d.opt.pct.recovery</code></pre>
+<pre><code>## # A tibble: 378 x 8
+## # Groups:   solvent.pct [7]
+##    solvent.pct compound               resp.mean resp.sd resp.ctrl.mean resp.ctrl.sd recovery.mean recovery.sd
+##    &lt;chr&gt;       &lt;chr&gt;                      &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
+##  1 60          3-HBA                      862.     46.5          935.          99.9          92.1       11.0 
+##  2 60          3-HPAA                    1101.     44.8         1258.          12.5          87.5        3.67
+##  3 60          3-HPPA                    1595.     95.6         1804.         104.           88.4        7.35
+##  4 60          3-HPVA                    1944.     95.2         2285.          22.4          85.1        4.25
+##  5 60          3-Hydroxycinnamic acid    1857.     21.7         2090.          45.6          88.9        2.20
+##  6 60          3-Hydroxyhippuric acid    1396.     41.1         1611.          46.5          86.6        3.58
+##  7 60          3-Hydroxytyrosol(-)       3021.    128.          3675.         470.           82.2       11.1 
+##  8 60          3-O-Me-EC                 2971.     68.6         3302.         106.           90.0        3.56
+##  9 60          3,4-diHBA                  256.     63.4          374.         190.           68.5       38.7 
+## 10 60          3,4-diHPAA                  27.2    13.1           48.1         28.4          56.6       43.2 
+## # … with 368 more rows</code></pre>
+<pre class="r"><code>plt.ACN.pct = d.opt.pct.recovery %&gt;%
+  ggplot(aes(x = solvent.pct, y = recovery.mean, color = compound)) +
+  geom_boxplot(outlier.alpha = 0, aes(group = solvent.pct)) +
+  # geom_errorbar(aes(ymin = recovery.mean - recovery.sd, ymax = recovery.mean + recovery.sd),
+  #               position = position_dodge(.3), size = .2, width = 2) +
+  geom_point(position = position_dodge(.4), shape = 21, fill = &quot;white&quot;, size = 1) +
+  theme(legend.position = &quot;none&quot;) +
+  # coord_flip(ylim = c(0, 130)) +
+  scale_y_continuous(breaks = seq(0, 150, by = 10)) +
+  labs(y = &quot;Recovery&quot;, x= &quot;Acetonitrile percentage&quot;) +
+  coord_cartesian(ylim = c(0, 130)) 
+# Activation with 200 uL varied ACN percent, without secondary wash
+
+# plt.ACN.pct
+
+
+
+# Secondary wash volume
+d.opt.wash = read_excel(path, sheet = &quot;2nd wash&quot;)
+d.opt.wash = d.opt.wash %&gt;% 
+  gather(-c(`Data File`, Name, `Acq. Date-Time`, volume), key = compound, value = resp)
+
+x = d.opt.wash %&gt;% filter(volume == &quot;ctrl&quot;) 
+x = x %&gt;% group_by(compound) %&gt;%
+  summarise(resp.ctrl = mean(resp), resp.ctrl.sd = sd(resp))
+
+y = d.opt.wash %&gt;% filter(volume != &quot;ctrl&quot;) %&gt;%
+  group_by(volume, compound) %&gt;%
+  summarise(resp.mean = mean(resp), resp.sd = sd(resp))
+
+d.opt.wash = y %&gt;% left_join(x, by = &quot;compound&quot;) %&gt;%
+  mutate(recovery.mean = resp.mean / resp.ctrl * 100,
+         recovery.sd = sqrt((resp.sd/resp.mean)^2 + (resp.ctrl.sd/resp.ctrl)^2) * recovery.mean )
+
+plt.wash = d.opt.wash %&gt;% 
+  ggplot(aes(x = volume, y = recovery.mean, color = compound)) +
+  geom_boxplot(outlier.alpha = 0, aes(group = volume)) +
+  geom_point(position = position_dodge(.5), shape = 21, fill = &quot;white&quot;, size = 1) +
+  # geom_errorbar(aes(ymin = recovery.mean - recovery.sd,
+  #                   ymax = recovery.mean + recovery.sd),
+  #               size = .1, width = .5, position = position_dodge(.5)) +
+  theme(legend.position = &quot;None&quot;) +
+  labs(y = &quot;Recovery&quot;, x = &quot;Secondary wash volume (uL)&quot;) + 
+  coord_cartesian(ylim = c(0, 130)) +
+  scale_y_continuous(breaks = seq(0, 130, 10)) 
+# 85% ACN elution, activation with 200 uL 85% ACN&quot;
+
+# plt.wash
+
+# d.opt.wash$recovery.sd %&gt;% hist(breaks = 100)
+
+# grid.arrange(plt.ACN.pct, plt.wash, nrow = 1)
+
+
+
+
+
+# Activation
+d.opt.act = read_excel(path, sheet = &quot;Activation&quot;)
+d.opt.act = d.opt.act %&gt;%
+  gather(-c(`Data File`, Name, `Acq. Date-Time`, Volume), key = compound, value = resp)
+
+x = d.opt.act %&gt;% filter(Volume != &quot;ctrl&quot;)
+x = x %&gt;% group_by(compound, Volume) %&gt;%
+  summarise(resp.mean = mean(resp),resp.sd = sd(resp))
+
+y = d.opt.act %&gt;% filter(Volume == &quot;ctrl&quot;) %&gt;%
+  group_by(compound) %&gt;%
+  summarise(resp.ctrl.mean = mean(resp), resp.ctrl.sd = sd(resp))
+
+d.opt.act = x %&gt;% left_join(y, by = &quot;compound&quot;) %&gt;%
+  mutate(recovery = resp.mean / resp.ctrl.mean * 100,
+         recovery.sd = sqrt((resp.sd / resp.mean)^2 +  (resp.ctrl.sd/ resp.ctrl.mean)^2) * recovery )
+
+plt.act = d.opt.act %&gt;%
+  ggplot(aes(x = Volume, y = recovery, color = compound)) +
+  geom_boxplot(outlier.alpha = 0, aes(group = Volume)) +
+  geom_point(position = position_dodge(.5), shape = 21, fill = &quot;white&quot;) +
+  theme(legend.position = &quot;None&quot;)
+# plt.act
+
+
+# draw together
+o = d.opt.pct.recovery %&gt;% select(solvent.pct, compound, recovery.mean) %&gt;%
+  rename(recovery = recovery.mean, level = solvent.pct) %&gt;%
+  mutate(experiment = &quot;ACN percentage&quot;)
+
+p = d.opt.wash %&gt;% select(volume, compound, recovery.mean) %&gt;%
+  rename(recovery = recovery.mean, level = volume) %&gt;%
+  mutate(experiment = &quot;Secondary wash&quot;)
+
+q = d.opt.act %&gt;% select(Volume, compound, recovery) %&gt;%
+  rename(level = Volume) %&gt;%
+  mutate(experiment = &quot;Activation&quot;)
+
+
+k = rbind(o, p) %&gt;% rbind(q)
+k$experiment = k$experiment %&gt;% 
+  factor(levels = c(&quot;ACN percentage&quot;, &quot;Secondary wash&quot;, &quot;Activation&quot;), ordered = T)
+
+library(RColorBrewer)
+color.compound = (c(brewer.pal(8, &quot;Dark2&quot;),
+                    brewer.pal(11, &quot;Spectral&quot;)[-c(5, 6, 7)],# remove light colors
+                    &quot;black&quot;, &quot;grey&quot;) %&gt;% sort() %&gt;%
+                    colorRampPalette())(k$compound %&gt;% n_distinct()) 
+
+
+plt.EMR.optimization = k %&gt;% group_by(experiment) %&gt;% mutate(n = n_distinct(level)) %&gt;%  
+  ggplot(aes(x = level, y = recovery, color = compound, fill = compound)) +
+  geom_boxplot(aes(group = level), outlier.alpha = 0, fill = &quot;snow4&quot;) +
+  
+  geom_point(position = position_dodge(.4), 
+             shape = 21, fill = &quot;white&quot;, size = 2) +
+  
+  geom_point(position = position_dodge(.4), 
+             shape = 21, size = 2, alpha = .2) +
+  
+  facet_wrap(~experiment, scales = &quot;free_x&quot;) +
+  scale_y_continuous(limits = c(20, 120), breaks = seq(20, 120, 10)) +
+  theme(legend.position = &quot;None&quot;,
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 13),
+        strip.text = element_text(size = 12)) +
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound)</code></pre>
+<pre class="r"><code>plt.EMR.optimization</code></pre>
+<pre><code>## Warning: Removed 27 rows containing non-finite values (stat_boxplot).</code></pre>
+<pre><code>## Warning: Removed 27 rows containing missing values (geom_point).
+
+## Warning: Removed 27 rows containing missing values (geom_point).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="1728" /></p>
+<pre class="r"><code># EMR opt 9.4 X 5.03</code></pre>
+<pre class="r"><code>#-&amp;=$$$$$$$$$$-&amp;=$$$$$$$$$$-&amp;=$$$$$$$$$$-&amp;=$$$$$$$$$$-&amp;=$$$$$$$$$$-&amp;=$$$$$$$$$$-&amp;=$$$$$$$$$$-&amp;=$$$$$$$$$$-----
+
+
+
+
+# silica gel optimization 
+# first check the recovery without silica gel
+
+# No silica gel
+d.gelFree = read_excel(path, sheet = &quot;silica gel 1&quot;, range = &quot;C19:BF20&quot;)
+d.gelFree = d.gelFree %&gt;% 
+  gather(-c(1:2), key = compound, value = recovery) 
+
+
+# compound color (for low recovery compounds)
+
+d.low = d.gelFree %&gt;% filter(recovery &lt; 60)
+lowRcmpd = d.low$compound
+
+color.compound = colorRampPalette( brewer.pal(8, &quot;Dark2&quot;) %&gt;% sort())(lowRcmpd %&gt;% length())
+names(color.compound) = lowRcmpd
+
+
+plt.sorbentFree = d.gelFree %&gt;% 
+  anti_join(d.low, by = &quot;compound&quot;) %&gt;%
+  ggplot(aes(x = `mass (mg)`, y = recovery)) +
+  geom_boxplot(outlier.alpha = 0, aes(group = `mass (mg)`), 
+               data = d.gelFree) + # boxplot showing the distribution of all 
+  geom_point(shape = 21, fill = &quot;white&quot;, color = &quot;black&quot;,
+             position = position_jitter(.2)) +
+  theme(legend.position = &quot;None&quot;) +
+  facet_wrap(~`mass (mg)`) +
+  scale_y_continuous(breaks = seq(0, 130, 10)) +
+  coord_cartesian(ylim = c(0, 130))  +
+  
+  # low recovery points
+  geom_point(data =d.low,
+             aes(color = compound), position = position_dodge(.2),
+             shape = 21, stroke = .5, size = 2) +
+  
+  geom_point(data = d.low,
+             aes(color = compound, fill = compound), position = position_dodge(.2),
+             shape = 21, size = 2, alpha = .2) +
+  
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound) +
+  
+  geom_text_repel(data = d.low, 
+                  aes(label = compound, color = compound), size = 2,
+                  position = position_dodge(.2))
+
+plt.sorbentFree</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<pre class="r"><code># -&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;--&lt;&gt;-
+
+
+
+# Now add the silica
+d.silica = read_excel(path, sheet = &quot;silica gel 1&quot;, range = &quot;A1:BF12&quot;)
+
+d.silica = d.silica %&gt;%
+  select(-c(`Data File`, `Acq. Date-Time`)) %&gt;%
+  gather(-c(`mass (mg)`, ratio), key = compound, value = resp)
+
+x = d.silica %&gt;%
+  filter(`mass (mg)` == &quot;control&quot;) %&gt;%
+  select(- c(ratio, `mass (mg)`)) %&gt;%
+  rename(resp.ctrl = resp)
+
+d.silica = d.silica %&gt;% 
+  filter(`mass (mg)` != &quot;control&quot;) %&gt;%
+  left_join(x, by = &quot;compound&quot;) %&gt;%
+  mutate(recovery = resp/resp.ctrl * 100)
+
+
+
+# Plot
+# first convert levels to ordered factor
+
+d.silica$ratio = d.silica$ratio %&gt;% 
+  factor(levels = c(&quot;NP&quot;, &quot;NP:RP=8:2&quot;, &quot;NP:RP=5:5&quot;, &quot;NP:RP=3:7&quot;, &quot;RP&quot;), ordered = T)
+d.silica$`mass (mg)`  = d.silica$`mass (mg)` %&gt;% 
+  factor(levels = d.silica$`mass (mg)` %&gt;% unique(), ordered = T)
+
+
+plt.silica = d.silica %&gt;%
+  filter(! compound %in% lowRcmpd) %&gt;%
+  
+  ggplot(aes(x = `mass (mg)`, y = recovery)) +
+  geom_boxplot(outlier.alpha = 0, aes(group = c(`mass (mg)`)),
+               data = d.silica) + # boxplot showing the distribution of all
+  geom_point(position = position_jitter(.1), shape = 21, fill = &quot;white&quot;) +
+  theme(legend.position = &quot;None&quot;) +
+  facet_wrap(~ratio, nrow = 1) +
+  scale_y_continuous(breaks = seq(0, 140, 10)) +
+  coord_cartesian(ylim = c(0, 130)) +
+  
+  
+  geom_point(data = d.silica %&gt;% filter(compound %in% lowRcmpd),
+             position = position_dodge(.2), size = 2, stroke = .5,
+             aes(color = compound), shape = 21, fill = &quot;white&quot;) +
+  
+  geom_point(data = d.silica %&gt;% filter(compound %in% lowRcmpd),
+             position = position_dodge(.2),
+             aes(color = compound, fill = compound), size = 2, alpha = .2) +
+  
+  geom_text_repel(data = d.silica %&gt;% filter(compound %in% lowRcmpd),
+                  aes(label = compound, color = compound), size = 2,
+                  position = position_dodge(.2)) +
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound)
+
+# plt.silica
+
+
+
+# combine sorbent free + with sorbent
+plt.silica.all = plot_grid(plt.sorbentFree, plt.silica, nrow = 1, rel_widths = c(1, 6))</code></pre>
+<pre class="r"><code>plt.silica.all</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="1536" /></p>
+<pre class="r"><code># For those special low recovery compounds, check the condition of their best performance
+
+plt.lowRcmpd = d.silica %&gt;% filter(compound %in% lowRcmpd) %&gt;%
+  ggplot(aes(x = ratio, y = recovery, color = compound)) +
+  geom_line(aes(group = compound), position = position_dodge(.2)) +
+  geom_point(shape = 21, fill = &quot;white&quot;, stroke = 1, size= 2, 
+             position = position_dodge(.2)) +
+  facet_wrap(~`mass (mg)`) +
+  scale_y_continuous(breaks = seq(10, 80, 10)) +
+  theme(legend.position = &quot;bottom&quot;) +
+  scale_color_manual(values = color.compound)
+plt.lowRcmpd</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<pre class="r"><code>plt.silica.all</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" width="1152" /></p>
+<pre class="r"><code># -《》--《》--《》--《》--《》--《》--《》--《》--《》--《》--《》--《》--《》--《》-
+
+
+# Repeat the silica gel experiment in a more consistent manner July 18
+d.silica2 = read_excel(path, sheet = &quot;silica gel 2&quot;, range = &quot;B2:BD16&quot;)
+d.silica2 = d.silica2 %&gt;% gather(-c(treatment), key = compound, value = resp)
+x = d.silica2 %&gt;% filter(treatment == &quot;ctrl&quot;) %&gt;% 
+  group_by(compound) %&gt;%
+  summarise(resp.ctrl.mean = mean(resp),
+            resp.ctrl.sd = sd(resp))
+
+d.silica2.recovery = d.silica2 %&gt;% filter(treatment != &quot;ctrl&quot;) %&gt;% 
+  group_by(compound, treatment) %&gt;%
+  summarise(resp.mean = mean(resp),
+            resp.sd = sd(resp)) %&gt;%
+  # augment with control response
+  left_join(x, by = &quot;compound&quot;) %&gt;%
+  mutate(recovery.mean = resp.mean / resp.ctrl.mean * 100,
+         recovery.sd = sqrt((resp.sd / resp.mean)^2 + (resp.ctrl.sd/resp.ctrl.mean)^2) * recovery.mean)
+
+d.silica2.recovery$treatment = d.silica2.recovery$treatment %&gt;% 
+  factor(levels = c(&quot;Sorbent free&quot;, &quot;NP&quot;, &quot;NP:RP=8:2&quot;,&quot;NP:RP=5:5&quot;,&quot;NP:RP=3:7&quot;, &quot;RP&quot; ), ordered = T)
+
+
+
+# high recovery compounds
+d.silica2.recovery.normal = d.silica2.recovery %&gt;% filter(!(compound %in% lowRcmpd)) 
+
+# low recovery compounds
+d.silica2.recovery.Low = d.silica2.recovery %&gt;% filter(compound %in% lowRcmpd)
+
+# plot
+dg2 = .2
+
+plt.sorbent2 = d.silica2.recovery.normal %&gt;%
+  ggplot(aes(x = treatment, y = recovery.mean)) +
+  geom_boxplot(data = d.silica2.recovery, outlier.alpha = 0, 
+               aes(group = treatment), width = .6, fill = &quot;snow1&quot;) +
+  geom_point(position = position_jitter(.1), alpha = .5, size = 3)  +
+  theme(legend.position = &quot;None&quot;,panel.grid = element_blank()) +
+  coord_cartesian(ylim = c(0, 140)) +
+  scale_y_continuous(breaks = seq(0, 150, 10)) +
+  
+  # highlight low recovery compounds
+  geom_errorbar(data = d.silica2.recovery.Low, 
+                aes(ymin = recovery.mean - recovery.sd,
+                    ymax = recovery.mean + recovery.sd, color = compound),
+                size = .2, width = .5, position = position_dodge(dg2)) +
+  
+  
+  
+  
+  geom_text_repel(data = d.silica2.recovery %&gt;% filter(compound %in% lowRcmpd),
+                  aes(label = compound, color = compound), 
+                  position = position_dodge(dg2), size = 3.5, fontface = &quot;bold&quot;) +
+  
+  geom_line(data = d.silica2.recovery.Low,
+            aes(color = compound, fill = compound, group = compound), size = .1,
+            position = position_dodge(dg2)) +
+  
+  geom_point(data = d.silica2.recovery.Low,
+             aes(color = compound), shape = 21, fill = &quot;white&quot;,
+             position = position_dodge(dg2), size = 4)  +
+  
+  geom_point(data = d.silica2.recovery.Low,
+             aes(color = compound, fill = compound), shape = 21,
+             position = position_dodge(dg2), size = 4, alpha = .2)  +
+  
+  labs(y = &quot;Recovery&quot;)  +
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: fill</code></pre>
+<pre class="r"><code>plt.sorbent2</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" width="1152" /></p>
+<pre class="r"><code># plt.silica.all
+ggdraw() + 
+  draw_plot(plt.EMR.optimization, y = .5, height = .5) +
+  draw_plot(plt.sorbent2, x = .1, width = .8, height = .5)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-30-1.png" width="1152" /></p>
+<pre class="r"><code>#&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-&lt;&gt;-
+
+
+
+
+# silica gel with matrix. July 19 experiment
+# Using IS correction
+d.silica3 = read_excel(path, sheet = &quot;silica with matrix&quot;, range = &quot;A49:BC55&quot;)
+d.silica3 = d.silica3 %&gt;%
+  gather(-treatment, key = compound, value = recovery) 
+
+d.silica3$treatment = d.silica3$treatment %&gt;%
+  factor(levels = d.silica3$treatment %&gt;% unique(), ordered = T)
+
+normalx = d.silica3 %&gt;% filter(!(compound  %in% lowRcmpd))
+lowx = d.silica3 %&gt;% filter(compound  %in% lowRcmpd)
+
+plt.silica.matrix.IS.Corrected = 
+  normalx %&gt;% ggplot(aes(x = treatment, y = recovery)) +
+  geom_boxplot(data = d.silica3, outlier.alpha = 0, width = .6,
+               fill = &quot;snow1&quot;) +
+  geom_point(position = position_jitter(.1), alpha = .6) +
+  theme(legend.position = &quot;None&quot;, panel.grid = element_blank()) +
+  
+  # highlight low recovery compounds
+  geom_point(data = lowx, aes(color = compound),
+             position = position_dodge(.2), size = 3) +
+  
+  geom_line(data = lowx, aes(group = compound, color = compound), size = .2,
+            position = position_dodge(.2)) +
+  
+  geom_text_repel(data = lowx, aes(color = compound, label = compound),
+                  position = position_dodge(.2), size = 2.5, fontface = &quot;bold&quot;) +
+  scale_color_manual(values = color.compound) +
+  coord_cartesian(ylim = c(0, 140)) +
+  scale_y_continuous(breaks = seq(0, 150, 10))
+
+plt.silica.matrix.IS.Corrected</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<pre class="r"><code>d.silica3$recovery %&gt;% hist(breaks = 50)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
+<pre class="r"><code># without IS correction
+d.silica3.notCorrected = read_excel(path, sheet = &quot;silica with matrix&quot;, range = &quot;A1:BC17&quot;)
+
+# extract treatment name
+d.silica3.notCorrected$treatment = d.silica3.notCorrected$Sample %&gt;%
+  str_remove(pattern = DOT %R% &quot;r&quot;) %&gt;%
+  str_remove(pattern = DOT %R% zero_or_more(&quot;2&quot;) %R% zero_or_more(DOT) %R% &quot;d&quot;) 
+
+# mean and std
+d.silica3.notCorrected = d.silica3.notCorrected %&gt;%
+  select(-Sample) %&gt;%
+  gather(-treatment, key = compound, value = area) %&gt;%
+  group_by(treatment, compound) %&gt;%
+  summarise(area.mean = mean(area), area.sd = sd(area))
+
+
+# background, contrl and sorbent
+blk = d.silica3.notCorrected %&gt;% filter(treatment == &quot;1B&quot;) %&gt;%
+  ungroup() %&gt;% select(-treatment) %&gt;%
+  rename(area.mean.blk = area.mean,
+         area.sd.blk = area.sd)
+
+ctrl = d.silica3.notCorrected %&gt;% filter(treatment == &quot;control&quot;) %&gt;%
+  ungroup() %&gt;% select(-treatment) %&gt;%
+  rename(area.mean.ctrl = area.mean,
+         area.sd.ctrl = area.sd)
+
+# calculate recovery (not IS corrected)
+d.silica3.notCorrected =d.silica3.notCorrected %&gt;%
+  filter(!(treatment %in% c(&quot;1B&quot;, &quot;control&quot;))) %&gt;%
+  left_join(ctrl, by = &quot;compound&quot;) %&gt;%
+  left_join(blk, by = &quot;compound&quot;) %&gt;%
+  mutate(area.net.mean = area.mean - area.mean.blk,
+         recovery = area.net.mean / area.mean.ctrl * 100)
+
+d.silica3.notCorrected$treatment = d.silica3.notCorrected$treatment %&gt;% 
+  factor(levels = c(&quot;gel free&quot;, &quot;NP&quot;, &quot;NP:RP=8:2&quot;, &quot;NP:RP=5:5&quot;, &quot;NP:RP=3:7&quot;, &quot;RP&quot;), ordered = T)
+
+
+low3 = d.silica3.notCorrected %&gt;% filter(compound %in% lowRcmpd)
+normal3 = d.silica3.notCorrected %&gt;% filter(!(compound %in% lowRcmpd))
+
+plt.silica.matrix.Notcorrected = 
+  normal3  %&gt;%
+  ggplot(aes(x = treatment, y = recovery)) +
+  geom_boxplot(data = d.silica3.notCorrected, 
+               outlier.alpha = 0, width = .6,
+               fill = &quot;snow1&quot;) +
+  
+  geom_point(position = position_jitter(.1), alpha = .6, size = 3) +
+  coord_cartesian(ylim = c(0, 140)) +
+  scale_y_continuous(breaks = seq(0, 150, 10)) +
+  
+  
+  geom_line(data = low3, aes(group = compound, color = compound), 
+            size = .2, position = position_dodge(.2)) +
+  
+  geom_point(data = low3, aes(color = compound), shape = 21, fill = &quot;white&quot;,
+             position = position_dodge(.2), size = 4) +
+  
+  geom_point(data = low3, aes(color = compound, fill = compound),
+             position = position_dodge(.2), size = 4, alpha = .2) +
+  
+  geom_text_repel(data = low3,
+                  aes(label = compound, color =compound),
+                  position = position_dodge(.2), 
+                  size = 3.5, fontface = &quot;bold&quot;) +
+  
+  scale_color_manual(values = color.compound) +
+  scale_fill_manual(values = color.compound) +
+  theme(legend.position = &quot;None&quot;, panel.grid = element_blank())</code></pre>
+<pre class="r"><code>plt.silica.matrix.Notcorrected</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-32-1.png" width="1152" /></p>
+<pre class="r"><code># plot_grid(plt.sorbent2,
+#           
+#           plot_grid(plt.silica.matrix.Notcorrected, 
+#                     plt.silica.matrix.IS.Corrected, nrow = 1),
+#           nrow = 2)</code></pre>
+<pre class="r"><code>ggdraw() +
+  draw_plot(plt.sorbent2, y = .5, height = .5, x = .2, width = .6) +
+  draw_plot(plot_grid(plt.silica.matrix.Notcorrected,
+                      plt.silica.matrix.IS.Corrected, nrow = 1),
+            x = 0, width = 1, height = .5, y = 0)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-34-1.png" width="1152" /></p>
+<pre class="r"><code>theme_set(theme_bw() + theme(axis.text = element_text(size = 19),
+                axis.title = element_text(size = 19))) 
+
+plot_grid(plt.sorbent2, 
+          plt.silica.matrix.Notcorrected,
+          #plt.silica.matrix.IS.Corrected, 
+          nrow = 1, 
+          # labels = c(&quot;A&quot;, &quot;B&quot;#, &quot;C&quot;
+          #            ), 
+          label_size = 18)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-35-1.png" width="1152" /></p>
+<pre class="r"><code># device size 19 X 9.5</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
