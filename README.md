@@ -21,31 +21,47 @@ Reliable analysis of phenolic compounds in fatty matrices is a challenging task.
 
 ## Follow me. Keep Updated with My Latest Research
 
-<table style="border-collapse: collapse; width: 100%; border: 0;">
+<table style="border-collapse: collapse; width: 100%; border: 0; border-spacing: 0;">
   <tr>
     <td style="border: none;" align="center">
       <a href="https://medium.com/@yuanbo.faith">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Medium_%28website%29_logo.svg" alt="Medium Logo" style="max-width: 100px; height: auto; margin: 10px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Medium_%28website%29_logo.svg" alt="Medium Logo" style="height: 20px; max-width: 100px; margin: 10px;">
       </a>
     </td>
     <td style="border: none;" align="center">
       <a href="https://x.com/yuanbogeneral">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X Logo" style="max-width: 100px; height: auto; margin: 10px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X Logo" style="height: 33px; max-width: 100px; margin: 10px;">
       </a>
     </td>
     <td style="border: none;" align="center">
       <a href="https://www.databrewer.co/">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Logo_of_DataBrewer.co.png" alt="DataBrewer Logo" style="max-width: 100px; height: auto; margin: 10px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/DataBrewer.png" alt="DataBrewer Logo" style="height: 53px; max-width: 100px; margin: 10px;">
       </a>
     </td>
     <td style="border: none;" align="center">
       <a href="https://connects.catalyst.harvard.edu/Profiles/display/Person/193422">
-        <img src="https://upload.wikimedia.org/wikipedia/en/1/18/Harvard_shield-Public_Health.png" alt="Harvard Public Health Logo" style="max-width: 100px; height: auto; margin: 10px;">
+        <img src="https://upload.wikimedia.org/wikipedia/en/1/18/Harvard_shield-Public_Health.png" alt="Harvard Public Health Logo" style="height: 50px; max-width: 100px; margin: 10px;">
+      </a>
+    </td>
+    <td style="border: none;" align="center">
+      <a href="https://orcid.org/0000-0003-0222-8095">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" alt="ORCID Logo" style="height: 40px; max-width: 100px; margin: 10px;">
+      </a>
+    </td>
+    <td style="border: none;" align="center">
+      <a href="https://www.linkedin.com/in/bo-yuan-amazing/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo" style="height: 33px; max-width: 100px; margin: 10px;">
+      </a>
+    </td>
+    <td style="border: none;" align="center">
+      <a href="https://harvard.academia.edu/BYuan">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Academia.edu_logo.svg" alt="Academia Logo" style="height: 15px; max-width: 100px; margin: 10px;">
+      </a>
+    </td>
+    <td style="border: none;" align="center">
+      <a href="https://scholar.google.com/citations?user=aFh0570AAAAJ&hl=en">
+        <img src="https://static-00.iconduck.com/assets.00/google-scholar-icon-2048x2048-sjbhklt7.png" alt="Google Scholar" style="height: 35px; max-width: 100px; margin: 10px;">
       </a>
     </td>
   </tr>
 </table>
-
-  
-
-
